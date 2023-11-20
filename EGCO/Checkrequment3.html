@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3UI ด้วย Checkbox รวมกันไม่เกิน 100%</title>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .progressContainer {
+      width: 50px;
+      height: 300px;
+      position: relative;
+      border-radius: 25px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 2px solid #383636; /* เพิ่มเส้นขอบทึบ */
+    box-sizing: border-box; /* ปรับขนาดเพื่อให้เส้นขอบอยู่ภายใน element */
+    }
+    .progress {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background-color: #3498db;
+      border-radius: 25px;
+      transition: height 0.5s ease-in-out;
+    }
+
+    
+
+    .percentage {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+
+    .circleUI {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: #34db58;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+    /* Hide the progress bar when circle UI is displayed */
+    .progressContainer {
+      display: block;
+    }
+    /* Show the circle UI instead of the progress bar */
+    .circleUIContainer {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+        <!-- Progress bar container -->
+        <div class="progressContainer">
+          <div class="progress" id="progress"></div>
+        </div>
+        
+        <!-- Circular UI container -->
+        <div class="circleUIContainer">
+          <div class="circleUI" id="circleUI">100%</div>
+        </div>
+    
+
+    <div class="checkboxContainer">
+      <label class="checkboxLabel">
+        <input type="checkbox" value="5" onclick="updateUI()">
+        ประเมิณ
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="10" onclick="updateUI()">
+        ทำงานได้
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="10" onclick="updateUI()">
+        ปลอดภัย
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="30" onclick="updateUI()">
+        สมบูรณ์
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="25" onclick="updateUI()">
+        พร้อมใช้งาน
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="20" onclick="updateUI()">
+        ถูกต้องตามความต้องการ
+      </label>
+      
+    </div>
+    <p id="displayPercentage"> ปัจจุบัน: 0%</p>
+  </div>
+
+  <script>
+    function updateUI() {
+      const progress = document.getElementById('progress');
+      const circleUIContainer = document.querySelector('.circleUIContainer');
+      const display = document.getElementById('displayPercentage');
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      const container = document.querySelector('.container');
+      const progressContainer = document.querySelector('.progressContainer');
+  
+      let totalPercentage = 0;
+      checkboxes.forEach((checkbox) => {
+        totalPercentage += parseInt(checkbox.value);
+      });
+  
+      if (totalPercentage <= 100) {
+        progress.style.height = totalPercentage + '%';
+        display.textContent = `UI ปัจจุบัน: ${totalPercentage}%`;
+        if (totalPercentage === 100) {
+          // Hide the progress bar and show the circular UI
+          progress.style.display = 'none';
+          circleUIContainer.style.display = 'flex';
+          // Hide only the progress container
+          progressContainer.style.display = 'none';
+        } else {
+          // If it's not 100%, show the progress bar and hide the circular UI
+          progress.style.display = 'block';
+          circleUIContainer.style.display = 'none';
+          progressContainer.style.display = 'block';
+        }
+      } else {
+        checkboxes[checkboxes.length - 1].checked = false;
+        alert('ไม่สามารถเลือกเกิน 100% ได้');
+      }
+    }
+  </script>
+  
+  
+  
+</body>
+</html>

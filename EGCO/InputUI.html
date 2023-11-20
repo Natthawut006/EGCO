@@ -1,0 +1,49 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>UI ตามเปอร์เซ็นต์</title>
+    <style>
+      .container {
+        text-align: center;
+        margin-top: 50px;
+      }
+      #progressBar {
+        width: 300px;
+        height: 30px;
+        border: 1px solid #000;
+        margin-bottom: 20px;
+      }
+      #progress {
+        height: 100%;
+        background-color: #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="number" id="inputPercentage" placeholder="ป้อนเปอร์เซ็นต์ (0-100)">
+      <button onclick="updateUI()">แสดง</button>
+      <div id="progressBar">
+        <div id="progress"></div>
+      </div>
+      <p id="displayPercentage">UI ปัจจุบัน: 0%</p>
+    </div>
+
+    <script>
+      function updateUI() {
+        const input = document.getElementById('inputPercentage').value;
+        const progress = document.getElementById('progress');
+        const display = document.getElementById('displayPercentage');
+
+        if (input >= 0 && input <= 100) {
+          progress.style.width = input + '%';
+          display.textContent = `UI ปัจจุบัน: ${input}%`;
+        } else {
+          alert('โปรดป้อนเลขระหว่าง 0 ถึง 100');
+        }
+      }
+    </script>
+  </body>
+  </html>
+

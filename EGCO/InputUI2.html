@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UI แนวตั้งและโค้งมน</title>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .progressContainer {
+      width: 50px;
+      height: 300px;
+      position: relative;
+      border-radius: 25px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .progress {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background-color: #3498db;
+      border-radius: 25px;
+      transition: height 0.5s ease-in-out;
+    }
+    .percentage {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="progressContainer">
+      <div class="progress" id="progress"></div>
+    </div>
+    <p class="percentage" id="displayPercentage">0%</p>
+    <input type="number" id="inputPercentage" placeholder="ป้อนเปอร์เซ็นต์ (0-100)">
+  
+    <!-- <button onclick="updateUI()" style="margin-top: 25;">แสดง</button> -->
+    <button onclick="updateUI()" style="margin-top: 25px;">แสดง</button>
+
+  </div>
+
+  <script>
+    function updateUI() {
+      const input = document.getElementById('inputPercentage').value;
+      const progress = document.getElementById('progress');
+      const display = document.getElementById('displayPercentage');
+
+      if (input >= 0 && input <= 100) {
+        progress.style.height = input + '%';
+        display.textContent = input + '%';
+      } else {
+        alert('โปรดป้อนเลขระหว่าง 0 ถึง 100');
+      }
+    }
+  </script>
+</body>
+</html>

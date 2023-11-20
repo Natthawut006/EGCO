@@ -1,0 +1,101 @@
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2UI ด้วย Checkbox รวมกันไม่เกิน 100%</title>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .progressContainer {
+      width: 50px;
+      height: 300px;
+      position: relative;
+      border-radius: 25px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 2px solid #383636; /* เพิ่มเส้นขอบทึบ */
+    box-sizing: border-box; /* ปรับขนาดเพื่อให้เส้นขอบอยู่ภายใน element */
+    }
+    .progress {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background-color: #3498db;
+      border-radius: 25px;
+      transition: height 0.5s ease-in-out;
+    }
+
+    
+
+    .percentage {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="progressContainer">
+      <div class="progress" id="progress"></div>
+    </div>
+    <div class="checkboxContainer">
+      <label class="checkboxLabel">
+        <input type="checkbox" value="5" onclick="updateUI()">
+        ประเมิณ
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="10" onclick="updateUI()">
+        ทำงานได้
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="10" onclick="updateUI()">
+        ปลอดภัย
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="30" onclick="updateUI()">
+        สมบูรณ์
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="25" onclick="updateUI()">
+        พร้อมใช้งาน
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="20" onclick="updateUI()">
+        ถูกต้องตามความต้องการ
+      </label>
+      
+    </div>
+    <p id="displayPercentage"> ปัจจุบัน: 0%</p>
+  </div>
+
+  <script>
+    function updateUI() {
+      const progress = document.getElementById('progress');
+      const display = document.getElementById('displayPercentage');
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+      let totalPercentage = 0;
+      checkboxes.forEach((checkbox) => {
+        totalPercentage += parseInt(checkbox.value);
+      });
+
+      if (totalPercentage <= 100) {
+        progress.style.height = totalPercentage + '%';
+        display.textContent = `UI ปัจจุบัน: ${totalPercentage}%`;
+      } else {
+        checkboxes[checkboxes.length - 1].checked = false;
+        alert('ไม่สามารถเลือกเกิน 100% ได้');
+      }
+    }
+    
+  </script>
+</body>
+</html>
