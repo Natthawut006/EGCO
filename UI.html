@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UI อยู่ในวงกลม</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .circle-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .circle {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: #97eb76;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ui {
+      width: 120px;
+      height: 120px;
+      border-radius: 10%;
+      position: absolute;
+      cursor: pointer; 
+    }
+
+    .ui:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -25%); }
+    .ui:nth-child(2) { right: 0; top: 50%; transform: translate(25%, -50%); }
+    .ui:nth-child(3) { bottom: 0; left: 50%; transform: translate(-50%, 25%); }
+    .ui:nth-child(4) { left: 0; top: 50%; transform: translate(-25%, -50%); }
+
+    .uiwork {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border: 2px solid #800080;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .uigrap {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    
+    .uigrap span {
+      display: inline-block;
+      width: 50px;
+      text-align: center;
+    }
+    
+    .uigrap .graph {
+      display: inline-block;
+      height: 20px;
+      background-color: #800080;
+    }
+    .triangle-container .back-btn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="circle-container">
+    <div class="circle">
+      <!-- UI อยู่ภายในวงกลม -->
+      <div class="ui ui1" style="background-color: #ff0000;" onclick="showTriangle(this, 'red')">UI1</div>
+      <div class="ui ui2" style="background-color: #00ff00;" onclick="showTriangle(this, 'green')">UI2</div>
+      <div class="ui ui3" style="background-color: #0000ff;" onclick="showTriangle(this, 'blue')">UI3</div>
+      <div class="ui ui4" style="background-color: #ffff00;" onclick="showTriangle(this, 'yellow')">UI4</div>
+    </div>
+
+    <div class="triangle-container" id="triangleContainer">
+      <div class="triangle"></div>
+      <div class="back-btn" onclick="hideTriangle()">Back</div>
+    </div>
+
+    <!-- UIwork -->
+    <div class="uiwork" style="display: none;">
+      <h2>UIwork</h2>
+      <form id="dataForm">
+        <!-- เพิ่ม checkbox เพื่อเก็บข้อมูล -->
+        <label for="data1">Data 1</label>
+        <input type="checkbox" id="data1" onchange="updateData()">
+        <br>
+        <label for="data2">Data 2</label>
+        <input type="checkbox" id="data2" onchange="updateData()">
+        <br>
+        <label for="data3">Data 3</label>
+        <input type="checkbox" id="data3" onchange="updateData()">
+      </form>
+      <div id="dataDisplay"></div> <!-- ส่วนที่แสดงผลลัพธ์ -->
+
+      <!-- UIgrap -->
+      <div class="uigrap">
+        <span>Data 1</span>
+        <div class="graph" id="graph1"></div>
+      </div>
+      <div class="uigrap">
+        <span>Data 2</span>
+        <div class="graph" id="graph2"></div>
+      </div>
+      <div class="uigrap">
+        <span>Data 3</span>
+        <div class="graph" id="graph3"></div>
+      </div>
+
+      <div class="back-btn" onclick="hideTriangle()">Back</div>
+    </div>
+  </div>
+    <script>
+      /* JavaScript ส่วนที่มีการจัดการข้อมูลและแสดงผล */
+      function showTriangle(element, color) {
+        const triangleContainer = document.getElementById('triangleContainer');
+        triangleContainer.style.display = 'none'; // ซ่อน UI เมื่อคลิกที่ UI1-4
+  
+        const uiwork = document.querySelector('.uiwork');
+        uiwork.style.display = 'block'; // เปิด UIwork เมื่อคลิกที่ UI1-4
+  
+        const uiElements = document.querySelectorAll('.ui');
+        uiElements.forEach(ui => {
+          if (ui !== element) {
+            ui.style.display = 'none'; // ซ่อน UI ที่ไม่ได้ถูกคลิก
+          }
+        });
+  
+        const triangle = document.querySelector('.triangle');
+        triangle.style.borderBottomColor = color;
+      }
+  
+      function hideTriangle() {
+        const triangleContainer = document.getElementById('triangleContainer');
+        triangleContainer.style.display = 'block'; // เปิด UI เมื่อกด Back
+  
+        const uiwork = document.querySelector('.uiwork');
+        uiwork.style.display = 'none'; // ปิด UIwork เมื่อกด Back
+  
+        const uiElements = document.querySelectorAll('.ui');
+        uiElements.forEach(ui => {
+          ui.style.display = 'block'; // เปิด UI ทั้งหมดเมื่อกด Back
+        });
+      }
+  
+      function updateData() {
+        const dataForm = document.getElementById('dataForm');
+        const checkboxes = dataForm.querySelectorAll('input[type="checkbox"]');
+        let checkedCount = 0;
+  
+        checkboxes.forEach(checkbox => {
+          if (checkbox.checked) {
+            checkedCount++;
+          }
+        });
+  
+        const dataDisplay = document.getElementById('dataDisplay');
+        const percentage = (checkedCount / checkboxes.length) * 100;
+        dataDisplay.textContent = `Data completeness: ${percentage.toFixed(2)}%`;
+      }
+    </script>
+  </body>
+  </html>

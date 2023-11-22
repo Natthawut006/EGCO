@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>5UI ด้วย Checkbox รวมกันไม่เกิน 100%</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .progressContainer {
+      width: 50px;
+      height: 300px;
+      position: relative;
+      border-radius: 25px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 2px solid #383636;
+      box-sizing: border-box;
+    }
+    .progress {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background-color: #3498db;
+      border-radius: 25px;
+      transition: height 0.5s ease-in-out;
+    }
+    .circleUI {
+      width: 200px;
+      height: 200px;
+      font-weight: bold;
+      border-radius: 50%;
+      background-color: #39db34;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      /* display: none; */
+      display: none;
+      flex-direction: column;
+      margin-bottom: 30px;
+        
+    }
+    .circleUI i {
+      display: none;
+      margin-top: -10px;
+    }
+
+    /* Additional style for the square UI */
+    .squareUI {
+      width: 100px;
+      height: 100px;
+      background-color: #3498db;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <div class="container">
+    <!-- Square UI -->
+    <div class="squareUI" onclick="startUpdate()">
+      Click Me
+    </div>
+
+
+
+    <!-- Progress bar container -->
+    <div class="progressContainer" style="display: none;">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- Circular UI container -->
+    <div class="circleUIContainer" style="display: none;">
+      <div class="circleUI" id="circleUI">
+        100%
+        <i class="fas fa-check" style="padding-top: 20px;"></i>
+      </div>
+    </div>
+
+    <!-- Rest of your HTML content -->
+    <div class="checkboxContainer" style="display: none;">
+      <label class="checkboxLabel">
+        <input type="checkbox" value="5" onclick="updateUI()">
+        ประเมิณ
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="5" onclick="updateUI()">
+        ประเมิณ
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="5" onclick="updateUI()">
+        ประเมิณ
+      </label>
+      <label class="checkboxLabel">
+        <input type="checkbox" value="5" onclick="updateUI()">
+        ประเมิณ
+      </label>
+      <input type="checkbox" value="80" onclick="updateUI()">
+      ประเมิณ
+    </label>
+      <!-- ... More checkboxes ... -->
+    </div>
+    <p id="displayPercentage"> ปัจจุบัน: 0%</p>
+
+    <script>
+      function startUpdate() {
+        const squareUI = document.querySelector('.squareUI');
+        squareUI.style.display = 'none'; // Hide the square UI
+
+        // Show other UI elements
+        const progressContainer = document.querySelector('.progressContainer');
+        progressContainer.style.display = 'block';
+        const circleUI = document.querySelector('.circleUIContainer');
+        circleUI.style.display = 'block';
+        const checkboxContainer = document.querySelector('.checkboxContainer');
+        checkboxContainer.style.display = 'block';
+      }
+
+      function updateUI() {
+        const progress = document.getElementById('progress');
+        const circleUI = document.getElementById('circleUI');
+        const display = document.getElementById('displayPercentage');
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        const container = document.querySelector('.container');
+        const progressContainer = document.querySelector('.progressContainer');
+
+        let totalPercentage = 0;
+        checkboxes.forEach((checkbox) => {
+          totalPercentage += parseInt(checkbox.value);
+        });
+
+        if (totalPercentage <= 100) {
+          progress.style.height = totalPercentage + '%';
+          display.textContent = `UI ปัจจุบัน: ${totalPercentage}%`;
+          if (totalPercentage === 100) {
+            // Hide the progress bar and show the circular UI
+            progress.style.display = 'none';
+            circleUI.style.display = 'flex';
+            // Hide only the progress container
+            progressContainer.style.display = 'none';
+            // Show the tick icon
+            circleUI.querySelector('i').style.display = 'block';
+          } else {
+            // If it's not 100%, show the progress bar and hide the circular UI
+            progress.style.display = 'block';
+            circleUI.style.display = 'none';
+            progressContainer.style.display = 'block';
+            // Hide the tick icon
+            circleUI.querySelector('i').style.display = 'none';
+          }
+        } else {
+          checkboxes[checkboxes.length - 1].checked = false;
+          alert('ไม่สามารถเลือกเกิน 100% ได้');
+        }
+      }
+    </script>
+  </div>
+</body>
+</html>
