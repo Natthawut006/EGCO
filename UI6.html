@@ -52,7 +52,7 @@
   height: 120px;
   border-radius: 10%;
   /* สีพื้นหลังแต่ละ UI */
-  background-color: #ff0000;
+  background-color: #c91010;
 }
 
 .ui2 {
@@ -76,7 +76,7 @@
   height: 120px;
   border-radius: 10%;
   /* สีพื้นหลังแต่ละ UI */
-  background-color: #ffff00;
+  background-color: #8f3d3d;
 }
 
 .ui4 {
@@ -270,14 +270,16 @@
   </style>
 </head>
 <body>
+
+
   <!-- HTML และ UI อยู่ในวงกลม -->
    <!-- HTML และ UI อยู่ในวงกลม -->
+   <div>
    <div class="circle-container">
-   
     <div class="circle">
   
         <!-- UI1 -->
-        <div class="ui ui1" style="background-color: #ff0000;" onclick="showTriangle(this, 'red')">ฝ่ายที่1</div>
+        <div class="ui ui1" onclick="showTriangle(this, 'red')">ฝ่ายที่1</div>
         <div class="uiwork1" id="uiwork1">
             <div class="container">
                 <!-- Progress bar container -->
@@ -306,7 +308,7 @@
         </div>
 
         <!-------------------------- UI2 ---------------------->
-        <div class="ui ui2" style="background-color: #7070da;" onclick="showTriangle2(this, 'blue')">ฝ่ายที่2</div>
+        <div class="ui ui2" onclick="showTriangle2(this, 'blue')">ฝ่ายที่2</div>
         <div class="uiwork2" id="uiwork2">
             <div class="container">
                 <!-- Progress bar container -->
@@ -335,7 +337,7 @@
 
 <!--------------------------------- UI3 ----------------------------------------->
 
-<div class="ui ui3" style="background-color: #ffff00;" onclick="showTriangle3(this, 'yellow')">ฝ่ายที่3</div>
+<div class="ui ui3" onclick="showTriangle3(this, 'yellow')">ฝ่ายที่3</div>
 <div class="uiwork3" id="uiwork3">
     <div class="container">
         <!-- Progress bar container -->
@@ -360,7 +362,7 @@
 </div>
 <!------------------------------------- UI4 ------------------------------------------------------>
 
-<div class="ui ui4" style="background-color: #ff6600;" onclick="showTriangle4(this, 'yellow')">ฝ่ายที่4</div>
+<div class="ui ui4" onclick="showTriangle4(this, 'yellow')">ฝ่ายที่4</div>
 <div class="uiwork4" id="uiwork4">
     <div class="container">
         <!-- Progress bar container -->
@@ -388,7 +390,7 @@
 
     </div>
 </div>
-
+</div>
   <script>
 
 function addCheckbox() {
@@ -451,7 +453,7 @@ function addCheckbox2() {
 
     input.type = 'checkbox';
     input.value = checkboxValue;
-    input.setAttribute('onclick', 'updateUI()');
+    input.setAttribute('onclick', 'updateUI2()');
 
     label.className = 'checkboxLabel';
     label.appendChild(input); // เพิ่ม Checkbox หลังข้อความ
@@ -493,7 +495,7 @@ function addCheckbox3() {
 
     input.type = 'checkbox';
     input.value = checkboxValue;
-    input.setAttribute('onclick', 'updateUI()');
+    input.setAttribute('onclick', 'updateUI3()');
 
     label.className = 'checkboxLabel';
     label.appendChild(input); // เพิ่ม Checkbox หลังข้อความ
@@ -536,7 +538,7 @@ function addCheckbox4() {
 
     input.type = 'checkbox';
     input.value = checkboxValue;
-    input.setAttribute('onclick', 'updateUI()');
+    input.setAttribute('onclick', 'updateUI4()');
 
     label.className = 'checkboxLabel';
     label.appendChild(input); // เพิ่ม Checkbox หลังข้อความ

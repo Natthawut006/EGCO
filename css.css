@@ -1,0 +1,277 @@
+
+ html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr; /* จัดหัวข้อด้านบนและเนื้อหาด้านล่าง */
+    place-items: center; /* จัดให้อยู่ตรงกลาง */
+    height: 100vh; /* ขยับเนื้อหาทั้งหมดให้อยู่กลางจอ */
+    margin: 0;
+  }
+
+.content {
+    /* เนื้อหาภายในที่เป็นกลุ่มข้างใน อะ */
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+.circle-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: #41be41;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-inner {
+  width: 20px; /* ขนาดของวงกลมซ้อน */
+  height: 20px; /* ขนาดของวงกลมซ้อน */
+  border-radius: 50%; /* ให้เป็นวงกลม */
+  background-color: #fd0000; /* สีพื้นหลังของวงกลมซ้อน */
+  position: absolute; /* ตำแหน่งแบบอย่างเฉพาะ */
+  top: -50px; /* ตำแหน่งด้านบน (ลอยเหนือ) */
+  left: -50px; /* ตำแหน่งด้านซ้าย (ลอยซ้าย) */
+  z-index: 1; /* ให้วงกลมซ้อนอยู่ด้านบน */
+  }
+
+.circleUI {
+  width: 150px;
+  height: 150px;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #39db34;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  /* display: none; */
+  display: none;
+    flex-direction: column;
+    margin-bottom: 30px;
+    
+}
+.circleUI i {
+  display: none;
+  margin-top: -10px;
+}
+
+
+.ui1 {
+position: absolute;
+top: 20px;
+left: 20px;
+width: 120px;
+height: 120px;
+border-radius: 10%;
+/* สีพื้นหลังแต่ละ UI */
+background-color: #e4c45c;
+}
+
+.ui2 {
+position: absolute;
+top: 20px;
+right: 20px;
+width: 120px;
+height: 120px;
+border-radius: 10%;
+/* สีพื้นหลังแต่ละ UI */
+background-color: #bdcabd;
+}
+
+.ui3 {
+position: absolute;
+bottom: 20px;
+left: 20px;
+width: 120px;
+height: 120px;
+border-radius: 10%;
+/* สีพื้นหลังแต่ละ UI */
+background-color: #bdcabd;
+}
+
+.ui4 {
+position: absolute;
+bottom: 20px;
+right: 20px;
+width: 120px;
+height: 120px;
+border-radius: 10%;
+/* สีพื้นหลังแต่ละ UI */
+background-color: #e4c45c;
+}
+
+.ui {
+width: 125px;
+height: 125px;
+border-radius: 20%;
+position: absolute;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 16px;
+font-weight: bold;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* เพิ่มเงาที่นี่ */
+transition: transform 0.3s ease-in-out; /* เพิ่ม transition เพื่อทำให้การขยายเป็นไปอย่างนุ่มนวล */
+
+}
+
+ /* /////////ขนาดของ UI เมื่อถูกเลือก (เมาส์ชี้แล้วขยายขึ้นมา แบบสวยๆๆๆๆๆๆๆๆ)/////////*/
+.ui.active {
+  transform: scale(1.2);
+  z-index: 2; 
+}
+
+
+.uiwork1,.uiwork2,.uiwork3,.uiwork4 {
+position: absolute;
+/* bottom: 10px; */
+left: 50%;
+transform: translateX(-50%);
+width: 300px;
+padding: 20px;
+background-color: #f9f9f9;
+border: 2px solid #800080;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+display: none;
+/* z-index: 10; */
+}
+
+
+
+/* ////////////////  แถบ %  ////////////// */
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+
+.percentage {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.progressContainer {
+  width: 50px;
+  height: 300px;
+  position: relative;
+  border-radius: 25px;
+  background-color: #f0f0f0;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid #383636;
+  box-sizing: border-box;
+}
+
+.progress {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #3498db;
+  border-radius: 25px;
+  transition: height 0.5s ease-in-out;
+}
+
+.progressContainer {
+  width: 50px;
+  height: 150px;
+  position: relative;
+  border-radius: 25px;
+  background-color: #f0f0f0;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid #383636;
+  box-sizing: border-box;
+}
+
+.progress {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #3498db;
+  border-radius: 25px;
+  transition: height 0.5s ease-in-out;
+}
+
+
+
+
+
+/*/////////////ปุ่มเซฟและปิด ////////////////*/
+.saveButton {
+padding: 8px 16px;
+margin-top: 16px;
+background-color: rgb(6, 218, 77);
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+/*/////////////ปุ่มเซฟและปิด ////////////////*/
+.saveButton:hover {
+background-color: #b92929;
+}
+
+
+/*/////////////ปุ่ม checkbox และ icon ////////////////*/
+.checkboxContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkboxLabel {
+  margin-bottom: 8px;
+}
+
+/*/////////////ปุ่มเพิ่ม checkbox และ icon ////////////////*/
+.add-checkbox-btn {
+padding: 8px 12px;
+border: none;
+border-radius: 4px;
+background-color: #34db58;
+color: white;
+font-size: 16px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.add-checkbox-btn:hover {
+background-color: rgb(0, 143, 71);
+}
+
