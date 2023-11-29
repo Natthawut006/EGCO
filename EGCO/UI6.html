@@ -1,0 +1,775 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UI อยู่ในวงกลม</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .circle-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .circle {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: #41be41;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    .circle-inner {
+    width: 20px; /* ขนาดของวงกลมซ้อน */
+    height: 20px; /* ขนาดของวงกลมซ้อน */
+    border-radius: 50%; /* ให้เป็นวงกลม */
+    background-color: #fd0000; /* สีพื้นหลังของวงกลมซ้อน */
+    position: absolute; /* ตำแหน่งแบบอย่างเฉพาะ */
+    top: -50px; /* ตำแหน่งด้านบน (ลอยเหนือ) */
+    left: -50px; /* ตำแหน่งด้านซ้าย (ลอยซ้าย) */
+    z-index: 1; /* ให้วงกลมซ้อนอยู่ด้านบน */
+  }
+    }
+
+
+    .ui1 {
+  /* ตั้งค่าตำแหน่งและขนาด UI1 */
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
+  /* สีพื้นหลังแต่ละ UI */
+  background-color: #c91010;
+}
+
+.ui2 {
+  /* ตั้งค่าตำแหน่งและขนาด UI2 */
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
+  /* สีพื้นหลังแต่ละ UI */
+  background-color: #0000ff;
+}
+
+.ui3 {
+  /* ตั้งค่าตำแหน่งและขนาด UI3 */
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
+  /* สีพื้นหลังแต่ละ UI */
+  background-color: #8f3d3d;
+}
+
+.ui4 {
+  /* ตั้งค่าตำแหน่งและขนาด UI4 */
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 120px;
+  height: 120px;
+  border-radius: 10%;
+  /* สีพื้นหลังแต่ละ UI */
+  background-color: #00ffc8;
+}
+
+    .ui {
+    width: 125px;
+    height: 125px;
+    border-radius: 20%;
+    position: absolute;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* เพิ่มเงาที่นี่ */
+    transition: transform 0.3s ease-in-out; /* เพิ่ม transition เพื่อทำให้การขยายเป็นไปอย่างนุ่มนวล */
+
+  }
+  .ui.active {
+      transform: scale(1.2); /* ขนาดของ UI เมื่อถูกเลือก */
+      z-index: 2; /* ให้ UI ที่ถูกเลือกขึ้นหน้า */
+    }
+
+  
+
+
+
+.uiwork1,.uiwork2,.uiwork3,.uiwork4 {
+  position: absolute;
+  /* bottom: 10px; */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 2px solid #800080;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  /* z-index: 10; */
+}
+
+
+
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .progress {
+      width: 0;
+      height: 0%;
+      background-color: #3498db;
+      border-radius: 5px;
+      transition: width 0.3s ease-in-out;
+    }
+
+    .percentage {
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    .progressContainer {
+      width: 50px;
+      height: 300px;
+      position: relative;
+      border-radius: 25px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 2px solid #383636;
+      box-sizing: border-box;
+    }
+    .progress {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background-color: #3498db;
+      border-radius: 25px;
+      transition: height 0.5s ease-in-out;
+    }
+    .circleUI {
+      width: 150px;
+      height: 150px;
+      font-weight: bold;
+      border-radius: 50%;
+      background-color: #39db34;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      /* display: none; */
+      display: none;
+        flex-direction: column;
+        margin-bottom: 30px;
+        
+    }
+    .circleUI i {
+      display: none;
+      margin-top: -10px;
+    }
+
+
+       .progressContainer {
+      width: 50px;
+      height: 150px;
+      position: relative;
+      border-radius: 25px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 2px solid #383636;
+      box-sizing: border-box;
+    }
+    .progress {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background-color: #3498db;
+      border-radius: 25px;
+      transition: height 0.5s ease-in-out;
+    }
+    .checkboxContainer {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .checkboxLabel {
+      margin-bottom: 8px;
+    }
+
+    .saveButton {
+    padding: 8px 16px;
+    margin-top: 16px;
+    background-color: rgb(6, 218, 77);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .saveButton:hover {
+    background-color: #b92929;
+  }
+
+  /* CSS สำหรับกำหนดสไตล์ของปุ่มและ icon */
+.add-checkbox-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #34db58;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* .add-checkbox-btn i {
+  margin-right: 6px;
+} */
+
+.add-checkbox-btn:hover {
+  background-color: rgb(0, 143, 71);
+}
+
+  </style>
+</head>
+<body>
+
+
+  <!-- HTML และ UI อยู่ในวงกลม -->
+   <!-- HTML และ UI อยู่ในวงกลม -->
+   <div>
+   <div class="circle-container">
+    <div class="circle">
+  
+        <!-- UI1 -->
+        <div class="ui ui1" onclick="showTriangle(this, 'red')">ฝ่ายที่1</div>
+        <div class="uiwork1" id="uiwork1">
+            <div class="container">
+                <!-- Progress bar container -->
+ 
+
+                <div class="progressContainer">
+                    <div class="progress" id="progress"></div>
+                </div>
+
+                <!-- Circular UI container -->
+                <div class="circleUIContainer">
+                    <div class="circleUI" id="circleUI">
+                        100%
+                        <i class="fas fa-check" style="padding-top: 20px;"></i>
+                    </div>
+                </div>
+
+                <!--------------------------------UI1 ------------------------------------>
+                <div class="checkboxContainer">
+                    <!-- เพิ่ม checkboxes เพิ่มเติมได้ตามต้องการ -->
+                </div>
+                <button onclick="addCheckbox()" class="add-checkbox-btn"><i class="fas fa-plus"></i></button>
+                <p id="displayPercentage"> ปัจจุบัน: 0%</p>
+                <button class="saveButton" onclick="saveAndCloseUI()">เซฟและปิด</button>
+            </div>
+        </div>
+
+        <!-------------------------- UI2 ---------------------->
+        <div class="ui ui2" onclick="showTriangle2(this, 'blue')">ฝ่ายที่2</div>
+        <div class="uiwork2" id="uiwork2">
+            <div class="container">
+                <!-- Progress bar container -->
+
+
+                <div class="progressContainer">
+                    <div class="progress" id="progress2"></div>
+                </div>  
+
+                <!-- Circular UI container -->
+                <div class="circleUIContainer">
+                    <div class="circleUI" id="circleUI2">
+                        100%
+                        <i class="fas fa-check" style="padding-top: 20px;"></i>
+                    </div>
+                </div>
+                <!-- เพิ่ม checkbox สำหรับ UI2 -->
+                <div class="checkboxContainer2">
+                    <!-- เพิ่ม checkboxes เพิ่มเติมได้ตามต้องการ -->
+                </div>
+                <button onclick="addCheckbox2()" class="add-checkbox-btn"><i class="fas fa-plus"></i></button>
+                <p id="displayPercentage2"> ปัจจุบัน: 0%</p>
+                <button class="saveButton" onclick="saveAndCloseUI2()">เซฟและปิด</button>
+            </div>
+        </div>
+
+<!--------------------------------- UI3 ----------------------------------------->
+
+<div class="ui ui3" onclick="showTriangle3(this, 'yellow')">ฝ่ายที่3</div>
+<div class="uiwork3" id="uiwork3">
+    <div class="container">
+        <!-- Progress bar container -->
+        <div class="progressContainer">
+            <div class="progress" id="progress3"></div>
+        </div>  
+        <!-- Circular UI container -->
+        <div class="circleUIContainer">
+            <div class="circleUI" id="circleUI3">
+                100%
+                <i class="fas fa-check" style="padding-top: 20px;"></i>
+            </div>
+        </div>
+                    <!-- เพิ่ม checkbox สำหรับ UI3 -->
+                    <div class="checkboxContainer3">
+                        <!-- เพิ่ม checkboxes เพิ่มเติมได้ตามต้องการ -->
+                    </div>
+                    <button onclick="addCheckbox3()" class="add-checkbox-btn"><i class="fas fa-plus"></i></button>
+                    <p id="displayPercentage3"> ปัจจุบัน: 0%</p>
+                    <button class="saveButton" onclick="saveAndCloseUI3()">เซฟและปิด</button>
+</div>
+</div>
+<!------------------------------------- UI4 ------------------------------------------------------>
+
+<div class="ui ui4" onclick="showTriangle4(this, 'yellow')">ฝ่ายที่4</div>
+<div class="uiwork4" id="uiwork4">
+    <div class="container">
+        <!-- Progress bar container -->
+        <div class="progressContainer">
+            <div class="progress" id="progress4"></div>
+        </div>  
+        <!-- Circular UI container -->
+        <div class="circleUIContainer">
+            <div class="circleUI" id="circleUI4">
+                100%
+                <i class="fas fa-check" style="padding-top: 20px;"></i>
+            </div>
+        </div>
+                    <!-- เพิ่ม checkbox สำหรับ UI4 -->
+                    <div class="checkboxContainer4">
+                        <!-- เพิ่ม checkboxes เพิ่มเติมได้ตามต้องการ -->
+                    </div>
+                    <button onclick="addCheckbox4()" class="add-checkbox-btn"><i class="fas fa-plus"></i></button>
+                    
+                    <p id="displayPercentage4"> ปัจจุบัน: 0%</p>
+                    <button class="saveButton" onclick="saveAndCloseUI4()">เซฟและปิด</button>
+                </div>
+            </div>
+
+
+    </div>
+</div>
+</div>
+  <script>
+
+function addCheckbox() {
+  const uiwork1 = document.querySelector('.uiwork1');
+  const checkboxContainer = uiwork1.querySelector('.checkboxContainer');
+
+  
+
+  const checkboxName = prompt('กรุณาใส่ชื่อ Checkbox:');
+  const checkboxValue = prompt('กรุณาใส่ค่า Checkbox (ตัวเลข):');
+  const checkboxText = prompt('ข้อความที่ต้องการแสดงหน้า Checkbox:');
+
+  if (checkboxName && checkboxValue && checkboxText) {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    const text = document.createTextNode(`${checkboxText} ${checkboxValue} %`);
+
+    input.type = 'checkbox';
+    input.value = checkboxValue;
+    input.setAttribute('onclick', 'updateUI()');
+
+    label.className = 'checkboxLabel';
+    label.appendChild(input); // เพิ่ม Checkbox หลังข้อความ
+    label.appendChild(text); // เพิ่มข้อความหลัง Checkbox
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>'; // เปลี่ยนเป็น icon ลบ
+    deleteButton.onclick = function () {
+      checkboxContainer.removeChild(label);
+    };
+    
+    // เพิ่ม style เพื่อกำหนดระยะห่างระหว่างข้อความและปุ่ม
+    deleteButton.style.marginLeft = '8px'; // ปรับค่า margin ตามที่ต้องการ
+    label.appendChild(text); // เพิ่มข้อความหลัง Checkbox
+    label.appendChild(deleteButton); // เพิ่มปุ่มลบลงใน label
+
+    checkboxContainer.appendChild(label);
+    label.setAttribute('data-name', checkboxName);
+  } else {
+    alert('กรุณาใส่ชื่อ, ค่า, และข้อความที่ต้องการแสดงหน้า Checkbox');
+  }
+}
+
+
+
+function addCheckbox2() {
+  const uiwork2 = document.querySelector('.uiwork2');
+  const checkboxContainer2 = uiwork2.querySelector('.checkboxContainer2');
+
+  
+
+  const checkboxName = prompt('กรุณาใส่ชื่อ Checkbox:');
+  const checkboxValue = prompt('กรุณาใส่ค่า Checkbox (ตัวเลข):');
+  const checkboxText = prompt('ข้อความที่ต้องการแสดงหน้า Checkbox:');
+
+  if (checkboxName && checkboxValue && checkboxText) {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    const text = document.createTextNode(`${checkboxText} ${checkboxValue} %`);
+
+    input.type = 'checkbox';
+    input.value = checkboxValue;
+    input.setAttribute('onclick', 'updateUI2()');
+
+    label.className = 'checkboxLabel';
+    label.appendChild(input); // เพิ่ม Checkbox หลังข้อความ
+    label.appendChild(text); // เพิ่มข้อความหลัง Checkbox
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>'; // เปลี่ยนเป็น icon ลบ
+    deleteButton.onclick = function () {
+        checkboxContainer2.removeChild(label);
+    };
+    
+    // เพิ่ม style เพื่อกำหนดระยะห่างระหว่างข้อความและปุ่ม
+    deleteButton.style.marginLeft = '8px'; // ปรับค่า margin ตามที่ต้องการ
+    label.appendChild(text); // เพิ่มข้อความหลัง Checkbox
+    label.appendChild(deleteButton); // เพิ่มปุ่มลบลงใน label
+
+    checkboxContainer2.appendChild(label);
+    label.setAttribute('data-name', checkboxName);
+  } else {
+    alert('กรุณาใส่ชื่อ, ค่า, และข้อความที่ต้องการแสดงหน้า Checkbox');
+  }
+}
+
+
+function addCheckbox3() {
+  const uiwork3 = document.querySelector('.uiwork3');
+  const checkboxContainer3 = uiwork3.querySelector('.checkboxContainer3');
+
+  
+
+  const checkboxName = prompt('กรุณาใส่ชื่อ Checkbox:');
+  const checkboxValue = prompt('กรุณาใส่ค่า Checkbox (ตัวเลข):');
+  const checkboxText = prompt('ข้อความที่ต้องการแสดงหน้า Checkbox:');
+
+  if (checkboxName && checkboxValue && checkboxText) {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    const text = document.createTextNode(`${checkboxText} ${checkboxValue} %`);
+
+    input.type = 'checkbox';
+    input.value = checkboxValue;
+    input.setAttribute('onclick', 'updateUI3()');
+
+    label.className = 'checkboxLabel';
+    label.appendChild(input); // เพิ่ม Checkbox หลังข้อความ
+    label.appendChild(text); // เพิ่มข้อความหลัง Checkbox
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>'; // เปลี่ยนเป็น icon ลบ
+    deleteButton.onclick = function () {
+        checkboxContainer3.removeChild(label);
+    };
+    
+    // เพิ่ม style เพื่อกำหนดระยะห่างระหว่างข้อความและปุ่ม
+    deleteButton.style.marginLeft = '8px'; // ปรับค่า margin ตามที่ต้องการ
+    label.appendChild(text); // เพิ่มข้อความหลัง Checkbox
+    label.appendChild(deleteButton); // เพิ่มปุ่มลบลงใน label
+
+    checkboxContainer3.appendChild(label);
+    label.setAttribute('data-name', checkboxName);
+  } else {
+    alert('กรุณาใส่ชื่อ, ค่า, และข้อความที่ต้องการแสดงหน้า Checkbox');
+  }
+}
+
+
+
+function addCheckbox4() {
+  const uiwork4 = document.querySelector('.uiwork4');
+  const checkboxContainer4 = uiwork4.querySelector('.checkboxContainer4');
+
+  
+
+  const checkboxName = prompt('กรุณาใส่ชื่อ Checkbox:');
+  const checkboxValue = prompt('กรุณาใส่ค่า Checkbox (ตัวเลข):');
+  const checkboxText = prompt('ข้อความที่ต้องการแสดงหน้า Checkbox:');
+
+  if (checkboxName && checkboxValue && checkboxText) {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    const text = document.createTextNode(`${checkboxText} ${checkboxValue} %`);
+
+    input.type = 'checkbox';
+    input.value = checkboxValue;
+    input.setAttribute('onclick', 'updateUI4()');
+
+    label.className = 'checkboxLabel';
+    label.appendChild(input); // เพิ่ม Checkbox หลังข้อความ
+    label.appendChild(text); // เพิ่มข้อความหลัง Checkbox
+
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>'; // เปลี่ยนเป็น icon ลบ
+    deleteButton.onclick = function () {
+        checkboxContainer4.removeChild(label);
+    };
+    
+    // เพิ่ม style เพื่อกำหนดระยะห่างระหว่างข้อความและปุ่ม
+    deleteButton.style.marginLeft = '8px'; // ปรับค่า margin ตามที่ต้องการ
+    label.appendChild(text); // เพิ่มข้อความหลัง Checkbox
+    label.appendChild(deleteButton); // เพิ่มปุ่มลบลงใน label
+
+    checkboxContainer4.appendChild(label);
+    label.setAttribute('data-name', checkboxName);
+  } else {
+    alert('กรุณาใส่ชื่อ, ค่า, และข้อความที่ต้องการแสดงหน้า Checkbox');
+  }
+}
+    ///////////////1///////////////////////////////
+    function updateUI() {
+  const uiwork1 = document.getElementById('uiwork1');
+  const progress = uiwork1.querySelector('#progress');
+  const circleUI = uiwork1.querySelector('#circleUI');
+  const display = uiwork1.querySelector('#displayPercentage');
+  const checkboxes = uiwork1.querySelectorAll('input[type="checkbox"]:checked');
+  const container = uiwork1.querySelector('.container');
+  const progressContainer = uiwork1.querySelector('.progressContainer');
+
+      let totalPercentage = 0;
+      checkboxes.forEach((checkbox) => {
+        totalPercentage += parseInt(checkbox.value);
+      });
+
+      if (totalPercentage <= 100) {
+        progress.style.height = totalPercentage + '%';
+        display.textContent = `UI ปัจจุบัน: ${totalPercentage}%`;
+        if (totalPercentage === 100) {
+          // Hide the progress bar and show the circular UI
+          progress.style.display = 'none';
+          circleUI.style.display = 'flex';
+          // Hide only the progress container
+          progressContainer.style.display = 'none';
+          // Show the tick icon
+          circleUI.querySelector('i').style.display = 'block';
+        } else {
+          // If it's not 100%, show the progress bar and hide the circular UI
+          progress.style.display = 'block';
+          circleUI.style.display = 'none';
+          progressContainer.style.display = 'block';
+          // Hide the tick icon
+          circleUI.querySelector('i').style.display = 'none';
+        }
+      } else {
+        checkboxes[checkboxes.length - 1].checked = false;
+        alert('ไม่สามารถเลือกเกิน 100% ได้');
+      }
+    }
+    function saveAndCloseUI() {
+    // ทำสิ่งที่ต้องการเซฟข้อมูลที่ต้องการที่นี่
+
+    // ปิดหน้า UI1
+    const uiwork1 = document.getElementById('uiwork1');
+    uiwork1.style.display = 'none';
+  }
+
+  function updateUI2() {
+  const uiwork2 = document.getElementById('uiwork2');
+  const progress = uiwork2.querySelector('#progress2');
+  const circleUI = uiwork2.querySelector('#circleUI2');
+  const display = uiwork2.querySelector('#displayPercentage2');
+  const checkboxes = uiwork2.querySelectorAll('input[type="checkbox"]:checked');
+  const container = uiwork2.querySelector('.container');
+  const progressContainer = uiwork2.querySelector('.progressContainer');
+
+    let totalPercentage = 0;
+    checkboxes.forEach((checkbox) => {
+        totalPercentage += parseInt(checkbox.value);
+    });
+
+    if (totalPercentage <= 100) {
+        progress.style.height = totalPercentage + '%';
+        display.textContent = `UI ปัจจุบัน: ${totalPercentage}%`;
+        if (totalPercentage === 100) {
+            progress.style.display = 'none';
+            circleUI.style.display = 'flex';
+            progressContainer.style.display = 'none';
+            circleUI.querySelector('i').style.display = 'block';
+        } else {
+            progress.style.display = 'block';
+            circleUI.style.display = 'none';
+            progressContainer.style.display = 'block';
+            circleUI.querySelector('i').style.display = 'none';
+        }
+    } else {
+        checkboxes[checkboxes.length - 1].checked = false;
+        alert('ไม่สามารถเลือกเกิน 100% ได้');
+    }
+}
+
+function saveAndCloseUI2() {
+    // ทำสิ่งที่ต้องการเซฟข้อมูล UI2 ที่นี่
+    const uiwork2 = document.getElementById('uiwork2');
+    uiwork2.style.display = 'none';
+}
+
+
+function updateUI3() {
+  // จัดการกับ UI3
+  const uiwork3 = document.getElementById('uiwork3');
+  const progress = uiwork3.querySelector('#progress3');
+  const circleUI = uiwork3.querySelector('#circleUI3');
+  const display = uiwork3.querySelector('#displayPercentage3');
+  const checkboxes = uiwork3.querySelectorAll('input[type="checkbox"]:checked');
+  const container = uiwork3.querySelector('.container');
+  const progressContainer = uiwork3.querySelector('.progressContainer');
+
+    let totalPercentage = 0;
+    checkboxes.forEach((checkbox) => {
+        totalPercentage += parseInt(checkbox.value);
+    });
+
+    if (totalPercentage <= 100) {
+        progress.style.height = totalPercentage + '%';
+        display.textContent = `UI ปัจจุบัน: ${totalPercentage}%`;
+        if (totalPercentage === 100) {
+            progress.style.display = 'none';
+            circleUI.style.display = 'flex';
+            progressContainer.style.display = 'none';
+            circleUI.querySelector('i').style.display = 'block';
+        } else {
+            progress.style.display = 'block';
+            circleUI.style.display = 'none';
+            progressContainer.style.display = 'block';
+            circleUI.querySelector('i').style.display = 'none';
+        }
+    } else {
+        checkboxes[checkboxes.length - 1].checked = false;
+        alert('ไม่สามารถเลือกเกิน 100% ได้');
+    }
+}
+
+
+function saveAndCloseUI3() {
+  // จัดการเก็บข้อมูล UI3
+  const uiwork3 = document.getElementById('uiwork3');
+    uiwork3.style.display = 'none';
+}
+function updateUI4() {
+  // จัดการกับ UI4
+  const uiwork4 = document.getElementById('uiwork4');
+  const progress = uiwork4.querySelector('#progress4');
+  const circleUI = uiwork4.querySelector('#circleUI4');
+  const display = uiwork4.querySelector('#displayPercentage4');
+  const checkboxes = uiwork4.querySelectorAll('input[type="checkbox"]:checked');
+  const container = uiwork4.querySelector('.container');
+  const progressContainer = uiwork4.querySelector('.progressContainer');
+
+    let totalPercentage = 0;
+    checkboxes.forEach((checkbox) => {
+        totalPercentage += parseInt(checkbox.value);
+    });
+
+    if (totalPercentage <= 100) {
+        progress.style.height = totalPercentage + '%';
+        display.textContent = `UI ปัจจุบัน: ${totalPercentage}%`;
+        if (totalPercentage === 100) {
+            progress.style.display = 'none';
+            circleUI.style.display = 'flex';
+            progressContainer.style.display = 'none';
+            circleUI.querySelector('i').style.display = 'block';
+        } else {
+            progress.style.display = 'block';
+            circleUI.style.display = 'none';
+            progressContainer.style.display = 'block';
+            circleUI.querySelector('i').style.display = 'none';
+        }
+    } else {
+        checkboxes[checkboxes.length - 1].checked = false;
+        alert('ไม่สามารถเลือกเกิน 100% ได้');
+    }
+}
+
+
+function saveAndCloseUI4() {
+  // จัดการเก็บข้อมูล UI4
+  const uiwork4 = document.getElementById('uiwork4');
+    uiwork4.style.display = 'none';
+}
+
+
+function showTriangle(element, color) {
+  const uiwork1 = document.getElementById('uiwork1');
+  uiwork1.style.display = 'block';
+  uiwork1.style.zIndex = '10'; // กำหนดค่า zIndex เมื่อแสดง UI1
+}
+
+function showTriangle2(element, color) {
+  const uiwork2 = document.getElementById('uiwork2');
+  uiwork2.style.display = 'block';
+  uiwork2.style.zIndex = '10'; // กำหนดค่า zIndex เมื่อแสดง UI2
+}
+function showTriangle3(element, color) {
+  const uiwork3 = document.getElementById('uiwork3');
+  uiwork3.style.display = 'block';
+  uiwork3.style.zIndex = '10';
+}
+function showTriangle4(element, color) {
+  const uiwork4 = document.getElementById('uiwork4');
+  uiwork4.style.display = 'block';
+  uiwork4.style.zIndex = '10';
+}
+
+
+const uiElements = document.querySelectorAll('.ui');
+
+uiElements.forEach(uiElement => {
+
+  uiElement.addEventListener('mouseenter', () => {
+    uiElement.classList.add('active');
+  });
+
+  uiElement.addEventListener('mouseleave', () => {
+    uiElement.classList.remove('active');
+  });
+
+
+});
+  </script>
+</body>
+</html>
